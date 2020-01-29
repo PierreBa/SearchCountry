@@ -1,20 +1,20 @@
 
 @font-face{
     font-family: "campton";
+    /*Je n'ai trouvé que Bold ou Light*/
     src: url("./font/Campton-BoldDEMO.otf");
 }
 
 body{
     background-color: #f2f5f7;
     margin: 0;
-    /* font-family: "campton" ; */
+    /*Je l'ai retirée car les caractères spéciaux ne s'affichent pas correctement*/
+    /* font-family: "campton" ;*/
 }
 
 #page{
     width: 100%;
     height: 100vh;
-    position: relative;
-    z-index: 0;
 }
 
 #container{
@@ -45,7 +45,9 @@ input{
     padding: 15px;
     max-height: 130px;
     background-color: white;
+    /*correspond à overflow scroll*/
     overflow-y:auto;
+    /*Le menu va apparraitre au dessus de la div container*/
     position: absolute;
     right: 25px;
     left: 25px;

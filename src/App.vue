@@ -22,7 +22,10 @@ export default {
   data() {
     return { showMenu: false, info: [], search: "" };
   },
-  mounted() {
+  mounted() 
+  // Evenement pour cacher le menu déroulant avec un click sur la page (l'élément #page prend 100% de l'écran cf. CSS),
+  // l'évenement ne se propage pas sur la div#container qui contient le label l'input et le menu lui même
+    {
     document.addEventListener("click", () => {
       this.showMenu = false;
       this.search = "";
@@ -31,17 +34,21 @@ export default {
     function stop(e) {
       e.stopPropagation();
     }
+    // Axios pour récuperer les data du REST
     axios
       .get("https://restcountries.eu/rest/v2/all")
       .then(response => (this.info = response.data));
   },
   methods: {
+    // Display le menu déroulant
     showModal() {
       this.showMenu = true;
     },
+    // Copie le pays au click sur la div qui contient l'image et le nom du pays
     copyCountry(name) {
       this.search = name;
     },
+    // Mise en forme du texte : argument name, le place dans une balise <strong> s'il correspond à search 
     countryBold(name) {
       if (this.search !== "") {
         return name.replace(new RegExp(this.search, "i"), match => {
@@ -53,9 +60,13 @@ export default {
   },
   computed: {
     countryFilter() {
+      // si search non vide
       if (this.search !== "") {
+        // Pour tous les pays dans infos, je les retourne
         return this.info.filter(country => {
+          // si la traduction française existe
           if (country.translations.fr != null) {
+            // et la recherche dans search correspond, (taille et index)
             return (
               country.translations.fr
                 .toLowerCase()
